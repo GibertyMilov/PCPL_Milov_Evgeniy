@@ -22,30 +22,25 @@ class ToolLanguage:
 
 class ProgrammingToolsService:
     def __init__(self, langs=None, tools=None, tool_langs=None):
-        """Инициализация сервиса с данными"""
         self.langs = langs or []
         self.tools = tools or []
         self.tool_langs = tool_langs or []
 
     def set_data(self, langs, tools, tool_langs):
-        """Установка данных"""
         self.langs = langs
         self.tools = tools
         self.tool_langs = tool_langs
 
     def get_tools_by_name_ending(self, ending):
-        """Получить инструменты с названиями, оканчивающимися на заданное окончание"""
         result = []
         for tool in self.tools:
             if tool.name.endswith(ending):
-                # Находим язык программирования для инструмента
                 lang = next((l for l in self.langs if l.id == tool.lang_id), None)
                 lang_name = lang.name if lang else "Unknown"
                 result.append((tool.name, lang_name))
         return result
 
     def get_average_tool_cost_by_language(self):
-        """Получить среднюю стоимость инструментов по языкам программирования"""
         lang_tool_stats = {}
 
         for lang in self.langs:
@@ -58,11 +53,9 @@ class ProgrammingToolsService:
                 avg_cost = total_cost / count
                 lang_tool_stats[lang.name] = avg_cost
 
-        # Сортируем по средней стоимости
         return sorted(lang_tool_stats.items(), key=lambda x: x[1])
 
     def get_languages_starting_with_letter(self, letter):
-        """Получить языки программирования, начинающиеся с заданной буквы, и их инструменты (многие-ко-многим)"""
         result = []
 
         for lang in self.langs:
@@ -81,17 +74,14 @@ class ProgrammingToolsService:
         return result
 
     def get_language_by_id(self, lang_id):
-        """Получить язык программирования по ID"""
         return next((lang for lang in self.langs if lang.id == lang_id), None)
 
     def get_tool_by_id(self, tool_id):
-        """Получить инструмент по ID"""
         return next((tool for tool in self.tools if tool.id == tool_id), None)
 
 
 # Функции для работы с данными по умолчанию
 def create_sample_data():
-    """Создание тестовых данных"""
     langs = [
         ProgrammingLanguage(1, "Python"),
         ProgrammingLanguage(2, "Java"),
@@ -127,7 +117,6 @@ def create_sample_data():
 
 
 def main():
-    """Основная функция для демонстрации работы"""
     service = ProgrammingToolsService()
     langs, tools, tool_langs = create_sample_data()
     service.set_data(langs, tools, tool_langs)
