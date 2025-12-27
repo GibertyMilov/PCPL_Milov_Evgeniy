@@ -1,9 +1,9 @@
 from behave import given, when, then
 import sys
 import os
-
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
+current_dir = os.path.dirname(os.path.abspath(__file__))
+lab_4_dir = os.path.dirname(os.path.dirname(current_dir))
+sys.path.insert(0, lab_4_dir)
 from field import field
 
 @given('список товаров с различными полями')

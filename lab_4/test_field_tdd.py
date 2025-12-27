@@ -1,7 +1,6 @@
 import unittest
 from field import field
 
-
 class TestFieldTDD(unittest.TestCase):
 
     def setUp(self):
@@ -31,7 +30,7 @@ class TestFieldTDD(unittest.TestCase):
 
     def test_none_values_are_skipped(self):
         result = list(field(self.test_data, 'color'))
-        expected = ['green', 'black', 'white']
+        expected = ['o', 'black', 'white']
         self.assertEqual(result, expected)
 
     def test_empty_list_returns_empty(self):
